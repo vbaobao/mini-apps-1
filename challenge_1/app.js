@@ -18,13 +18,20 @@
 // Global variables are not recommended, but using them for game
 // as it will reset the game score on reload
 // player object tracks how many points each player has
-var player = {
+var score = {
   x: 0,
   o: 0
 };
-var lastWinner = player.x;
+var players = ['X','O'];
+var lastWinner = 0;
 
-var startGame = () => {};
+var startGame = (lastWinner) => {
+  // new Board
+  // set up click listeners on the board
+  // click event to updateBoard
+  // update dom
+  // check if win
+};
 
 var updateBoardDOM = () => {};
 
@@ -36,13 +43,30 @@ class Board {
   }
 
   // Board methods
-  checkWinner() {}
+  checkWinner() {
+    let horizontal = [[0,1,2],[3,4,5],[6,7,8]];
+    let vertical = [[0,3,6],[1,4,7],[2,5,8]];
+    let diagonal = [[0,4,8],[2,4,6]];
+    let wins = [...horiztonal,...vertical,...diagonal];
+    // If win, alert message
+    for (let match of wins) {
+      // Check if listed indexes have the same value in board array
+      if (this.board[match[0]] === this.board[match[1]] && this.board[match[1]] === this.board[match[2]]) {
+        return this.board[match[0]];
+      }
+    }
+    return null;
+  }
 
-  updateBoard(player, index) {}
+  updateBoard(player, index) {
+    // update board's array
+    this.board[index] = players[player];
+    console.log('Board updated.');
+  }
 
-  alertWinner(player) {}
-
-  clearBoard() {}
+  alertWinner(player) {
+    alert(`${player} has won!`);
+  }
 }
 
 // Initialize game below
