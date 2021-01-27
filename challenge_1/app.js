@@ -16,9 +16,20 @@
  */
 
  // DOM Manipulation
-var updateBoardDOM = () => {};
+var updateBoardDOM = (updateCell, player) => {
+  updateCell.textContent = player;
+  console.log('Board updated.');
+};
 
-var updateScoreDOM = () => {};
+var updateScoreDOM = () => {
+  let winsX = document.querySelectorAll('.wins-x');
+  let winsO = document.querySelectorAll('.wins-o');
+  winsX.textContent = '';
+  winsO.textContent = '';
+  winsX.textContent = score.x;
+  winsO.textContent = score.o;
+  console.log('Scoreboard updated.');
+};
 
 // Global variables are not recommended, but using them for game
 // as it will reset the game score on reload
@@ -39,7 +50,7 @@ var startGame = (lastWinner) => {
   while(true) {
     // Apply click listeners to DOM
     // set up click listeners on the board
-    // click event to updateBoard
+    // click event to updateBoard(event,board)
     // Update board after each click
     // Check winner after each click
     // if win, alert winner, update score
@@ -52,6 +63,10 @@ class Board {
   }
 
   // Board methods
+  getBoard() {
+    return [...this.board];
+  };
+
   checkWinner() {
     let horizontal = [[0,1,2],[3,4,5],[6,7,8]];
     let vertical = [[0,3,6],[1,4,7],[2,5,8]];
