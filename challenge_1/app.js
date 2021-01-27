@@ -35,13 +35,13 @@ var updateScoreDOM = () => {
 // as it will reset the game score on reload
 // player object tracks how many points each player has
 var players = ['X','O'];
-var lastWinner = 0;
+var turn = 0;
 var score = {
   x: 0,
   o: 0
 };
 
-var startGame = (lastWinner) => {
+var startGame = (turn) => {
   let playing = true;
   let board = new Board();
   updateBoardDOM();
@@ -54,8 +54,16 @@ var startGame = (lastWinner) => {
     // Update board after each click
     // Check winner after each click
     // if win, alert winner, update score
+    let cells = document.querySelectorAll('td');
+    cells.forEach(cell => {
+      cell.addEventListener('click', e => {
+        console.log('clicked');
+      });
+    });
   }
 };
+
+var nextTurn = () => {};
 
 class Board {
   constructor() {
@@ -94,3 +102,4 @@ class Board {
 }
 
 // Initialize game below
+// Create start game click listener
