@@ -15,30 +15,39 @@
  * - method to clear board
  */
 
-// Global variables are not recommended, but using them for game
-// as it will reset the game score on reload
-// player object tracks how many points each player has
-var score = {
-  x: 0,
-  o: 0
-};
-var players = ['X','O'];
-var lastWinner = 0;
-
-var startGame = (lastWinner) => {
-  // new Board
-  // set up click listeners on the board
-  // click event to updateBoard
-  // update dom
-  // check if win
-};
-
+ // DOM Manipulation
 var updateBoardDOM = () => {};
 
 var updateScoreDOM = () => {};
 
+// Global variables are not recommended, but using them for game
+// as it will reset the game score on reload
+// player object tracks how many points each player has
+var players = ['X','O'];
+var lastWinner = 0;
+var score = {
+  x: 0,
+  o: 0
+};
+
+var startGame = (lastWinner) => {
+  let playing = true;
+  let board = new Board();
+  updateBoardDOM();
+  updateScoreDOM();
+
+  while(true) {
+    // Apply click listeners to DOM
+    // set up click listeners on the board
+    // click event to updateBoard
+    // Update board after each click
+    // Check winner after each click
+    // if win, alert winner, update score
+  }
+};
+
 class Board {
-  constructor(starter) {
+  constructor() {
     this.board = new Array(9).fill(0);
   }
 
