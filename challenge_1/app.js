@@ -24,12 +24,10 @@ var updateBoardDOM = (updateCell, playerSymbol) => {
 var updateScoreDOM = (score) => {
   let winsX = document.querySelector('.wins-x');
   let winsO = document.querySelector('.wins-o');
-  console.log(winsX);
   winsX.textContent = '';
   winsO.textContent = '';
   winsX.textContent = 'X: ' + score.X;
   winsO.textContent = 'O: ' + score.O;
-  console.log('Scoreboard updated.');
 };
 
 // Global variables are not recommended, but using them for game
@@ -53,16 +51,18 @@ var startGame = () => {
   let cells = document.querySelectorAll('td');
     cells.forEach((cell, i) => {
       cell.addEventListener('click', e => {
-        console.log(i);
-        // Update board
-        board.updateBoard(players[turn], i);
-        // Update DOM with position clicked
-        updateBoardDOM(cell, players[turn]);
-        // Check winner
-        if (board.checkWinner()) {
-          // If won, alert winner restart game
-          board.alertWinner(players[turn]);
-          startGame();
+        // Check if spot was already clicked
+        if (!board.checkDuplicate(i)) {
+          // Update board
+          board.updateBoard(players[turn], i);
+          // Update DOM with position clicked
+          updateBoardDOM(cell, players[turn]);
+          // Check winner
+          if (board.checkWinner()) {
+            // If won, alert winner restart game
+            board.alertWinner(players[turn]);
+            startGame();
+          }
         }
       });
     });
@@ -80,6 +80,11 @@ class Board {
     return [...this.board];
   };
 
+  checkDuplicate(dataIndex) {
+    // Check if the board is alread filled in that position.
+    return this.board[dataIndex] === 0 ? false : true;
+  }
+
   checkWinner() {
     let horizontal = [[0,1,2],[3,4,5],[6,7,8]];
     let vertical = [[0,3,6],[1,4,7],[2,5,8]];
@@ -88,15 +93,12 @@ class Board {
     // If win, alert message
     for (let match of wins) {
       // Check if listed indexes have the same value in board array
-      console.log(this.getBoard());
       if (this.board[match[0]] !== 0
         && this.board[match[0]] === this.board[match[1]]
         && this.board[match[1]] === this.board[match[2]]) {
-        console.log('THERE IS A WIN');
         return this.board[match[0]];
       }
     }
-    console.log('NO WIN');
     return null;
   }
 
