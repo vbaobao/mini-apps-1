@@ -16,12 +16,12 @@
  */
 
  // DOM Manipulation
-var updateBoardDOM = (updateCell, player) => {
-  updateCell.textContent = player;
-  console.log('Board updated.');
+var updateBoardDOM = (updateCell, playerSymbol) => {
+  console.log(playerSymbol);
+  updateCell.textContent = playerSymbol;
 };
 
-var updateScoreDOM = () => {
+var updateScoreDOM = (score) => {
   let winsX = document.querySelectorAll('.wins-x');
   let winsO = document.querySelectorAll('.wins-o');
   winsX.textContent = '';
@@ -37,30 +37,34 @@ var updateScoreDOM = () => {
 var players = ['X','O'];
 var turn = 0;
 var score = {
-  x: 0,
-  o: 0
+  X: 0,
+  O: 0
 };
 
-var startGame = (turn) => {
-  let playing = true;
+var startGame = () => {
   let board = new Board();
-  updateBoardDOM();
-  updateScoreDOM();
+  // Apply DOM with new board
+  for (let cell of board.getBoard()) {
+    updateBoardDOM(cell, players[turn]);
+  }
+  updateScoreDOM(score);
 
-  while(true) {
-    // Apply click listeners to DOM
-    // set up click listeners on the board
-    // click event to updateBoard(event,board)
-    // Update board after each click
-    // Check winner after each click
-    // if win, alert winner, update score
-    let cells = document.querySelectorAll('td');
-    cells.forEach(cell => {
+  let cells = document.querySelectorAll('td');
+    cells.forEach((cell, i) => {
       cell.addEventListener('click', e => {
-        console.log('clicked');
+        console.log(i);
+        // Update board
+        board.updateBoard(players[turn], i);
+        // Update DOM with position clicked
+        updateBoardDOM(cell, players[turn]);
+        // Check winner
+        if (board.checkWinner()) {
+          // If won, alert winner restart game
+          board.alertWinner(players[turn]);
+          startGame();
+        }
       });
     });
-  }
 };
 
 var nextTurn = () => {};
@@ -79,27 +83,33 @@ class Board {
     let horizontal = [[0,1,2],[3,4,5],[6,7,8]];
     let vertical = [[0,3,6],[1,4,7],[2,5,8]];
     let diagonal = [[0,4,8],[2,4,6]];
-    let wins = [...horiztonal,...vertical,...diagonal];
+    let wins = [...horizontal,...vertical,...diagonal];
     // If win, alert message
     for (let match of wins) {
       // Check if listed indexes have the same value in board array
-      if (this.board[match[0]] === this.board[match[1]] && this.board[match[1]] === this.board[match[2]]) {
+      console.log(this.getBoard());
+      if (this.board[match[0]] !== 0
+        && this.board[match[0]] === this.board[match[1]]
+        && this.board[match[1]] === this.board[match[2]]) {
+        console.log('THERE IS A WIN');
         return this.board[match[0]];
       }
     }
+    console.log('NO WIN');
     return null;
   }
 
-  updateBoard(player, index) {
+  updateBoard(playerSymbol, dataIndex) {
     // update board's array
-    this.board[index] = players[player];
-    console.log('Board updated.');
+    this.board[dataIndex] = playerSymbol;
   }
 
-  alertWinner(player) {
-    alert(`${player} has won!`);
+  alertWinner(playerSymbol) {
+    setTimeout(() => { alert(`${playerSymbol} has won!`); }, 0);
+    score[playerSymbol] += 1;
   }
 }
 
 // Initialize game below
 // Create start game click listener
+startGame();
