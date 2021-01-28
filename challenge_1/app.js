@@ -17,7 +17,6 @@
 
  // DOM Manipulation
 var updateBoardDOM = (updateCell, playerSymbol) => {
-  console.log(playerSymbol);
   updateCell.textContent = playerSymbol;
 };
 
@@ -39,36 +38,17 @@ var score = {
   X: 0,
   O: 0
 };
+var isRunning = true;
 
-var startGame = () => {
-  let board = new Board();
+var newGame = (board) => {
+  isRunning = true;
+  board.clearBoard();
   // Apply DOM with new board
-  for (let cell of board.getBoard()) {
-    updateBoardDOM(cell, players[turn]);
-  }
-  updateScoreDOM(score);
-
   let cells = document.querySelectorAll('td');
-    cells.forEach((cell, i) => {
-      cell.addEventListener('click', e => {
-        // Check if spot was already clicked
-        if (!board.checkDuplicate(i)) {
-          // Update board
-          board.updateBoard(players[turn], i);
-          // Update DOM with position clicked
-          updateBoardDOM(cell, players[turn]);
-          // Check winner
-          if (board.checkWinner()) {
-            // If won, alert winner restart game
-            board.alertWinner(players[turn]);
-            startGame();
-          }
-        }
-      });
-    });
+  for (let cell of cells) {
+    updateBoardDOM(cell, '');
+  }
 };
-
-var nextTurn = () => {};
 
 class Board {
   constructor() {
@@ -78,6 +58,10 @@ class Board {
   // Board methods
   getBoard() {
     return [...this.board];
+  };
+
+  clearBoard() {
+    this.board = new Array(9).fill(0);
   };
 
   checkDuplicate(dataIndex) {
@@ -110,9 +94,38 @@ class Board {
   alertWinner(playerSymbol) {
     setTimeout(() => { alert(`${playerSymbol} has won!`); }, 0);
     score[playerSymbol] += 1;
+    updateScoreDOM(score);
   }
 }
 
 // Initialize game below
 // Create start game click listener
-startGame();
+var resetButton = document.querySelector('button');
+resetButton.addEventListener('click', e => {
+  newGame(board);
+});
+
+var board = new Board();
+var cells = document.querySelectorAll('td');
+cells.forEach((cell, i) => {
+  cell.addEventListener('click', e => {
+    // Check if spot was already clicked
+    if (!board.checkDuplicate(i) && isRunning) {
+      // Update board
+      board.updateBoard(players[turn], i);
+      // Update DOM with position clicked
+      updateBoardDOM(cell, players[turn]);
+      // Check winner
+      if (board.checkWinner()) {
+        // If won, alert winner restart game
+        board.alertWinner(players[turn]);
+        isRunning = false;
+      } else if (board.getBoard().indexOf(0) === -1) {
+        // Check for tie
+        setTimeout(() => { alert('There is a tie! Please restart the game!'); },0);
+      } else {
+        turn = turn === 0 ? 1 : 0;
+      }
+    }
+  });
+});

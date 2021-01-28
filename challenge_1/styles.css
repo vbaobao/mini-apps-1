@@ -1,23 +1,73 @@
 html {}
 
-body {}
+body {
+  margin: auto;
+}
 
-h1 {}
+h1 {
+  text-align: center;
+  background-color: #ffea83;
+  padding: 10%;
+  margin: 0;
+  color: #f74747;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 400%;
+}
 
-button {}
+button {
+  margin: 20px auto;
+  justify-content: center;
+  border-style: none;
+  border-radius: 10px;
+  padding: 10px 25px;
+  background-color: #3ed1d6;
+  font-weight: bold;
+}
 
-.container {}
+button:hover {
+  background-color: #b1b1b1;
+  color: white;
+}
 
-.scoreboard {}
+span {
+  font-weight: bold;
+  color: black;
+}
 
-.scores {}
+.container {
+  display: flex;
+  flex-direction: column;
+  color: #f74747;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #fff7ce;
+  padding: 0 0 10% 0;
+}
 
-.board {}
+.scoreboard {
+  display: flex;
+  flex-direction: column;
+}
 
-tr {}
+.scores {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px;
+  font-size: 200%;
+}
+
+.board {
+  margin: 10px auto;
+}
 
 td {
   height: 100px;
   width: 100px;
   border: solid 2px #8b8260;
+  background-color: white;
+  text-align: center;
+  font-size: 400%;
+}
+
+td:hover {
+  background-color: #ffedaa;
 }
