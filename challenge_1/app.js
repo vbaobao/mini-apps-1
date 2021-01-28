@@ -22,12 +22,13 @@ var updateBoardDOM = (updateCell, playerSymbol) => {
 };
 
 var updateScoreDOM = (score) => {
-  let winsX = document.querySelectorAll('.wins-x');
-  let winsO = document.querySelectorAll('.wins-o');
+  let winsX = document.querySelector('.wins-x');
+  let winsO = document.querySelector('.wins-o');
+  console.log(winsX);
   winsX.textContent = '';
   winsO.textContent = '';
-  winsX.textContent = score.x;
-  winsO.textContent = score.o;
+  winsX.textContent = 'X: ' + score.X;
+  winsO.textContent = 'O: ' + score.O;
   console.log('Scoreboard updated.');
 };
 
