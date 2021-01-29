@@ -23,7 +23,11 @@ app.post('/', (req,res,next) => {
       if (err) { return console.error(err); }
       let fileObject = jsonFileParser(data);
       let csv = convertToCSV(fileObject);
-      res.render('index.ejs', {csv: csv});
+
+      fs.writeFile('./csv.txt', csv, (err,data) => {
+        if (err) { return console.error(err); }
+        res.send(csv);
+      });
     });
   });
 });
