@@ -4,11 +4,10 @@
     <title>CSV Generator</title>
   </head>
   <body>
-    <form action='/' method='POST'>
+    <form action='/' method='POST' enctype='multipart/form-data'>
       <label>Please enter JSON here:</label>
-      <input type='text' name='name'/>
-      <textarea name='text' required></textarea>
-      <input type='submit'/>
+      <input type='file' name='file' accept='.json' required />
+      <input type='submit' value='submit' />
     </form>
 
     <script src='app.js'></script>

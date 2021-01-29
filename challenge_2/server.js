@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const fs = require('fs');
 const app = express();
 const port = 3000;
 
@@ -12,7 +13,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use('/', express.static('client'));
 
 app.post('/', (req,res) => {
-  console.log(req.body);
-  console.log(req.body.name);
-  res.send(req.body.text);
+  console.log('BODY: ', req.body);
+  console.log(req.body.file);
+  // fs.readFile(req.body.file, (err, data) => {
+  //   if (err) { return console.error(err); }
+  //   console.log(data);
+  //   res.redirect('/');
+  // });
+  res.redirect('/');
 });
