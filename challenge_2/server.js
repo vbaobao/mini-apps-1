@@ -11,8 +11,11 @@ app.listen(port, () => {
 app.use('/', express.static('client'));
 app.set('view engine', 'ejs');
 
-app.get('/', (req,res) => {
-  res.render('index.ejs');
+app.get('/download', (req,res) => {
+  res.download('csv.txt', (err) => {
+    if (err) { return console.log(err); }
+    console.log('Download request successful.');
+  });
 });
 
 app.post('/', (req,res,next) => {

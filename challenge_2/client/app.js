@@ -10,14 +10,12 @@ $('form').on('submit', e => {
     processData: false,
     success: (data) => {
       $('.csv').append(data);
+
     },
     error: () => { console.log('Failed form request'); }
   });
 });
 
-$('button').on('click', e => {
-  console.log('click');
-  // $.get('http://localhost:3000', data => {
-  //   console.log(data);
-  // });
+$('.download').on('click', e => {
+  window.open('http://localhost:3000/download');
 });
