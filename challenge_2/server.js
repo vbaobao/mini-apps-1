@@ -17,6 +17,7 @@ app.post('/', (req,res,next) => {
     fs.readFile(files.file.path, 'utf8', (err, data) => {
       if (err) { return console.error(err); }
       let fileObject = jsonFileParser(data);
+      convertToCSV(fileObject);
       res.redirect('/');
     });
   });
@@ -32,13 +33,35 @@ var jsonFileParser = (file) => {
 
 var convertToCSV = (object) => {
   // Create an array of arrays
+  let result = [[]];
+  let csv;
   // Iterate through object keys for first array index
-  // Recursively iterate through the objects
-  // grabbing only values based on keys in array[0]
-  // push to a new array for each object
-  // recursively look through children
+  for (let key in object) {
+    if (key !== 'children') {
+      result[0].push(key);
+    }
+  }
 
-  // Join each array of array with a comma (plain join)
-  // Join entire array with newlines
-  // return converted string
+  recurseTree([object],result[0],result);
+
+  csv = result.join('\n');
+  console.log(csv);
+  return csv;
 };
+
+var recurseTree = (childArray,keys,result) => {
+  for (let child of childArray) {
+    let newCSVRow = [];
+    for (let key of keys) {
+      newCSVRow.push(child[key]);
+    }
+    result.push(newCSVRow);
+  }
+  for (let child of childArray) {
+    if (child.children.length !== 0) {
+      recurseTree(child.children,keys,result);
+    }
+  }
+};
+
+var sendCSVToDOM = () => {};
