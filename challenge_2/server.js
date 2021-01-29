@@ -1,7 +1,6 @@
 const express = require('express');
 const formidable = require('formidable');
 const fs = require('fs');
-const $ = require('jQuery');
 const app = express();
 const port = 3000;
 
@@ -18,8 +17,7 @@ app.post('/', (req,res,next) => {
     fs.readFile(files.file.path, 'utf8', (err, data) => {
       if (err) { return console.error(err); }
       let fileObject = jsonFileParser(data);
-      sendCSVToDOM(convertToCSV(fileObject));
-      res.redirect('/');
+      res.send(convertToCSV(fileObject));
     });
   });
 });
@@ -63,9 +61,4 @@ var recurseTree = (childArray,keys,result) => {
       recurseTree(child.children,keys,result);
     }
   }
-};
-
-var sendCSVToDOM = (csv) => {
-  $('.csv').text('');
-  $('.csv').append(csv);
 };
