@@ -9,6 +9,11 @@ app.listen(port, () => {
 });
 
 app.use('/', express.static('client'));
+app.set('view engine', 'ejs');
+
+app.get('/', (req,res) => {
+  res.render('index.ejs');
+});
 
 app.post('/', (req,res,next) => {
   const form = formidable({multiples: true});
@@ -17,13 +22,14 @@ app.post('/', (req,res,next) => {
     fs.readFile(files.file.path, 'utf8', (err, data) => {
       if (err) { return console.error(err); }
       let fileObject = jsonFileParser(data);
-      res.send(convertToCSV(fileObject));
+      let csv = convertToCSV(fileObject);
+      res.render('index.ejs', {csv: csv});
     });
   });
 });
 
 var jsonFileParser = (file) => {
-  let asString = file.replace(/\r|\n|\s/g, '');
+  let asString = file.replace(/\r|\n/g, '');
   if (asString[asString.length - 1]) {
     asString = asString.slice(0, asString.length - 1);
   }
@@ -43,8 +49,8 @@ var convertToCSV = (object) => {
 
   recurseTree([object],result[0],result);
 
-  csv = result.join('\n');
-  console.log(csv);
+  csv = result.join('</p><p>');
+  csv = '<p>' + csv + '</p>';
   return csv;
 };
 
