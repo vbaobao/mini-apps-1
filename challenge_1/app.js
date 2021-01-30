@@ -25,8 +25,8 @@ var updateScoreDOM = (score) => {
   let winsO = document.querySelector('.wins-o');
   winsX.textContent = '';
   winsO.textContent = '';
-  winsX.textContent = 'X: ' + score.X;
-  winsO.textContent = 'O: ' + score.O;
+  winsX.innerHTML = '<span>X:</span> ' + score.X;
+  winsO.innerHTML = '<span>O:</span> ' + score.O;
 };
 
 // Global variables are not recommended, but using them for game
