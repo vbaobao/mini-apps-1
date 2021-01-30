@@ -29,7 +29,7 @@ app.post('/', (req,res,next) => {
 
       fs.writeFile('./csv.txt', csv, (err,data) => {
         if (err) { return console.error(err); }
-        res.send(csv);
+        res.send(csv.replace(/\r\n/g, '<br>'));
       });
     });
   });
@@ -56,8 +56,7 @@ var convertToCSV = (object) => {
 
   recurseTree([object],result[0],result);
 
-  csv = result.join('</p><p>');
-  csv = '<p>' + csv + '</p>';
+  csv = result.join('\r\n');
   return csv;
 };
 
