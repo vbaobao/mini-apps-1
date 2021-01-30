@@ -1,0 +1,56 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 2%;
+  text-align: center;
+}
+
+label {
+  font-weight: bold;
+}
+
+section {
+  background-color: #f6fff6;
+  height: 70%;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 300;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 2%;
+  padding: 2%;
+  background-color: #ffdd76;
+  border-radius: 10px;
+}
+
+.container.json {
+  width: 20%;
+}
+
+.container.converted {
+  width: 78%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.jsonform {
+  margin: 2%;
+}
