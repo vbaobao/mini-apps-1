@@ -1,7 +1,9 @@
-import React from 'react';
-
 class App extends React.Component {
-  render() { return <h1>HELLO</h1>; }
+  constructor(props) {
+    super(props)
+  }
+
+  render() { return <h1>HELLO</h1> }
 }
 
-ReactDOM.render(<App />, document.getElementByID('root'));
+ReactDOM.render(<App />, document.getElementById('root'));

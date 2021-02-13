@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:3000/checkout');
+mongoose.connect('mongodb://localhost/checkout', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const db = mongoose.connection;
-db.once('open', () => console.log('Database connected on http://localhost:3000'));
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => console.log('--- Database connected ---'));
 
 const checkoutForm = new mongoose.Schema({
   name: String,
