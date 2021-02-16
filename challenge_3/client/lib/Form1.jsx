@@ -15,7 +15,7 @@ function Form1(props) {
           Password:
           <input type="text" name="password" required />
         </label>
-        <input type="submit" value="submit" onClick={()=>{console.log('clicked')}} />
+        <input type="submit" value="Next" onClick={()=>{console.log('clicked')}} />
       </form>
     </div>
   );

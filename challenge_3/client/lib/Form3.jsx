@@ -20,7 +20,7 @@ function Form3(props) {
           Billing Zipcode:
           <input type="number" name="cc_zipcode" />
         </label>
-        <input type="submit" value="submit" onClick={()=>{console.log('clicked')}} />
+        <input type="submit" value="Purchase" onClick={()=>{console.log('clicked')}} />
       </form>
     </div>
   );

@@ -1,7 +1,14 @@
 class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { formNum: 0 }
+    this.state = {
+      formNum: 1,
+      forms: {
+        form1: {},
+        form2: {},
+        form3: {}
+      }
+    }
   }
 
   render() { return (

@@ -27,7 +27,7 @@ function Form2(props) {
           Phone Number:
           <input type="number" name="phone_prefix" />
         </label>
-        <input type="submit" value="submit" onClick={()=>{console.log('clicked')}} />
+        <input type="submit" value="Next" onClick={()=>{console.log('clicked')}} />
       </form>
     </div>
   );
