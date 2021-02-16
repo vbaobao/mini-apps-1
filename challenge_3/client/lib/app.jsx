@@ -20,7 +20,7 @@ class App extends React.Component {
       }
     }
 
-    axios.post('/checkout', formData)
+    axios.post('/checkout', formdata)
       .then((res) => {
         console.log(res);
         this.setState({currentForm: 1});
