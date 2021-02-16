@@ -22,7 +22,7 @@ class Form3 extends React.Component {
     return (
       <div class='form3'>
         <h2>Payment Information</h2>
-        <form method='POST' onSubmit={this.props.handleSubmit}>
+        <form onSubmit={this.props.handleSubmit}>
           <label>
             Credit Card Number:
             <input type="number" name="cc_number" value={this.state.cc_number} onChange={this.handleChange} />
