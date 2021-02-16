@@ -25,7 +25,7 @@ function Form2(props) {
         </label>
         <label>
           Phone Number:
-          <input type="number" name="phone_prefix" onChange={()=>{console.log('Validate here')}} />
+          <input type="number" name="phone_prefix" />
         </label>
         <input type="submit" value="submit" onClick={()=>{console.log('clicked')}} />
       </form>
