@@ -1,6 +1,7 @@
 function Form1(props) {
   return (
     <div class='form1'>
+      <h2>Create Account</h2>
       <form>
         <label>
           Name:
