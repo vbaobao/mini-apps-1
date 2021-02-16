@@ -19,17 +19,18 @@ class App extends React.Component {
 
   handleNext(e) {
     e.preventDefault();
+    console.log(e.target.name);
     //setState to form data
   }
 
   render() {
     let formToRender;
     if (this.state.currentForm === 1) {
-      formToRender = <Form1 />;
+      formToRender = <Form1 handleNext={this.handleNext} />;
     } else if (this.state.currentForm === 2) {
-      formToRender = <Form2 />;
+      formToRender = <Form2 handleNext={this.handleNext} />;
     } else if (this.state.currentForm === 3) {
-      formToRender = <Form3 />;
+      formToRender = <Form3 handleNext={this.handleSubmit} />;
     }
 
     return (
