@@ -31,7 +31,6 @@ const Row = mongoose.model('Row', checkoutForm);
 module.exports = {
 
   newCheckout: (data, cb) => {
-    console.log(data);
     let newCustomer = new Row({
       name: data.name,
       email: data.email,
@@ -54,7 +53,7 @@ module.exports = {
     });
     newCustomer.save((err, results) => {
       if (err) callback(err);
-      cb(null,results._id);
+      cb(null, results._id);
     });
   }
 

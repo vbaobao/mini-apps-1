@@ -13,16 +13,9 @@ class App extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let formdata = {...this.state.forms};
-    for (const state of e.target) {
-      if (state.name !== '') {
-        formdata[state.name] = state.value;
-      }
-    }
-
-    axios.post('/checkout', formdata)
+    axios.post('/checkout', this.state.forms)
       .then((res) => {
-        console.log(res);
+        alert(`Thank you for ordering! Your order number is ${res.data}`);
         this.setState({currentForm: 1});
       })
       .catch(err => console.error(err));
@@ -47,7 +40,9 @@ class App extends React.Component {
     } else if (this.state.currentForm === 2) {
       formToRender = <Form2 handleNext={this.handleNext} />;
     } else if (this.state.currentForm === 3) {
-      formToRender = <Form3 handleSubmit={this.handleSubmit} />;
+      formToRender = <Form3 handleNext={this.handleNext} />;
+    } else {
+      formToRender = <Summary formdata={this.state.forms} handleSubmit={this.handleSubmit} />;
     }
 
     return (

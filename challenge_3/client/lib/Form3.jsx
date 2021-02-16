@@ -22,7 +22,7 @@ class Form3 extends React.Component {
     return (
       <div class='form3'>
         <h2>Payment Information</h2>
-        <form onSubmit={this.props.handleSubmit}>
+        <form onSubmit={this.props.handleNext}>
           <label>
             Credit Card Number:
             <input type="number" name="cc_number" value={this.state.cc_number} onChange={this.handleChange} />
@@ -40,7 +40,7 @@ class Form3 extends React.Component {
             Billing Zipcode:
             <input type="number" name="cc_zipcode" value={this.state.cc_zipcode} onChange={this.handleChange} />
           </label>
-          <input type="submit" value="Purchase" />
+          <input type="submit" value="Next" />
         </form>
       </div>
     );

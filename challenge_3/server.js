@@ -11,7 +11,7 @@ app.post('/checkout', (req,res) => {
   db.newCheckout(req.body, (err, results)=> {
     if (err) res.send(err);
     console.log(results);
-    res.send('GOT REQUEST THANKS');
+    res.send(results);
   });
 })
 
