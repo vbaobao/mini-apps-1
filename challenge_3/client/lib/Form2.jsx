@@ -5,29 +5,29 @@ function Form2(props) {
       <form>
         <label>
           Address Line 1:
-          <input type='text' name='address_ln1' />
+          <input type="text" name="address_ln1" />
         </label>
         <label>
           Address Line 2:
-          <input type='text' name='address_ln2' />
+          <input type="text" name="address_ln2" />
         </label>
         <label>
           City:
-          <input type='text' name='city' />
+          <input type="text" name="city" />
         </label>
         <label>
           State:
-          <input type='text' name='state' />
+          <input type="text" name="state" maxLength="2" />
         </label>
         <label>
           Zip Code:
-          <input type='text' name='zipcode' />
+          <input type="text" name="zipcode" maxLength="5" />
         </label>
         <label>
           Phone Number:
-          <input type='text' name='phone' />
+          <input type="number" name="phone_prefix" onChange={()=>{console.log('Validate here')}} />
         </label>
-        <input type='submit' value='submit' onClick={()=>{console.log('clicked')}} />
+        <input type="submit" value="submit" onClick={()=>{console.log('clicked')}} />
       </form>
     </div>
   );
