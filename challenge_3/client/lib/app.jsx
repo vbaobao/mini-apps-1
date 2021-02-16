@@ -26,6 +26,12 @@ class App extends React.Component {
       }
     }
     this.setState(newState);
+
+    if (this.state.currentForm === 3) {
+      this.setState({currentForm: 1});
+    } else {
+      this.setState({currentForm: this.state.currentForm + 1});
+    }
   }
 
   render() {
