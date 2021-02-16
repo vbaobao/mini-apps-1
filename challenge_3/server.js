@@ -8,8 +8,11 @@ app.use(bodyparser.json());
 app.use(express.static('./public'));
 
 app.post('/checkout', (req,res) => {
-  console.log(req.body);
-  res.send('GOT REQUEST THANKS');
+  db.newCheckout(req.body, (err, results)=> {
+    if (err) res.send(err);
+    console.log(results);
+    res.send('GOT REQUEST THANKS');
+  });
 })
 
 app.listen('3000', () => console.log(`--- Example app listening at http://localhost:3000`));
