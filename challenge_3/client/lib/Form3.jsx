@@ -16,7 +16,6 @@ class Form3 extends React.Component {
     let newState = {};
     newState[e.target.name] = e.target.value;
     this.setState(newState);
-    console.log(newState);
   }
 
   render() {
