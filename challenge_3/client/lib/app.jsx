@@ -19,8 +19,13 @@ class App extends React.Component {
 
   handleNext(e) {
     e.preventDefault();
-    console.log(e.target.name);
-    //setState to form data
+    let newState = {};
+    for (const state of e.target) {
+      if (state.name !== '') {
+        newState[state.name] = state.value;
+      }
+    }
+    this.setState(newState);
   }
 
   render() {
