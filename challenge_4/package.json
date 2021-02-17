@@ -10,9 +10,8 @@
     ]
   },
   "scripts": {
-    "build-client": "webpack --watch",
-    "start-server": "nodemon --watch server.js",
-    "start": "npm run build-client && npm run start-server"
+    "build": "webpack --watch",
+    "start": "nodemon --watch server.js"
   },
   "keywords": [],
   "author": "",
