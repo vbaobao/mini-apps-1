@@ -14,22 +14,46 @@ class App extends React.Component {
         [0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0]
       ],
-      turn: p1,
+      turn: 1,
       winner: null
     };
   }
 
   handleClick(e) {}
 
-  checkHorizontal() {}
+  checkHorizontalWin(player, row, board) {
+    let run = 0;
+    for (const col of board[row]) {
+      if (run === 4) {
+        return true;
+      } else if (board[row][col] === player) {
+        run++;
+      } else {
+        run = 0;
+      }
+    }
+    return run => 4;
+  }
 
-  checkVertical() {}
+  checkVerticalWin(player, col, board) {
+    let run = 0;
+    for (let i = 0; i < board.length; i++) {
+      if (run === 4) {
+        return true;
+      } else if (board[i][col] === player) {
+        run++;
+      } else {
+        run = 0;
+      }
+    }
+    return false;
+  }
 
-  checkDiagL() {}
+  checkDiagLWin(player, position, board) {}
 
-  checkDiagR() {}
+  checkDiagRWin(player, position, board) {}
 
-  checkWin() {}
+  checkWin(player, position, board) {}
 
   resetGame() {}
 
