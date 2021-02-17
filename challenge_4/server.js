@@ -5,6 +5,6 @@ const port = 3000;
 
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(bodyparser.json());
-app.use(express.static());
+app.use(express.static('./public'));
 
-app.listen(port, console.log(`Listening on port ${port}`));
+app.listen(port, console.log(`Listening on http://localhost:${port}`));
