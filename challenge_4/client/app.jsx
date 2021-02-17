@@ -13,9 +13,25 @@ class App extends React.Component {
         [0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0]
-      ]
+      ],
+      turn: p1,
+      winner: null
     };
   }
+
+  handleClick(e) {}
+
+  checkHorizontal() {}
+
+  checkVertical() {}
+
+  checkDiagL() {}
+
+  checkDiagR() {}
+
+  checkWin() {}
+
+  resetGame() {}
 
   render() {
     return (
