@@ -4,8 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "build-client": "webpack --watch",
+    "start-server": "nodemon --watch server.js",
+    "start": "npm run build-client && npm run start-server"
   },
   "keywords": [],
   "author": "",
