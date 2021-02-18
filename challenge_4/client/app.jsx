@@ -58,8 +58,8 @@ class App extends React.Component {
 
   handleClick(e) {
     //When clicked grab column
-    let selRow = e.target.attributes.row.value;
-    let selCol = e.target.attributes.col.value;
+    let selRow = Number(e.target.attributes.row.value);
+    let selCol = Number(e.target.attributes.col.value);
     let currBoard = this.state.board;
     let player = this.state.turn;
 
@@ -73,7 +73,7 @@ class App extends React.Component {
         this.setState({board: newBoard});
 
         //checkWin condition
-        console.log(this.checkWin(player, [selRow, selCol], newBoard));
+        console.log(this.checkWin(player, [row, selCol], newBoard));
         //if win, setWinner and setNextPlayer to winner
         //if not win, setNextPlayer
 
