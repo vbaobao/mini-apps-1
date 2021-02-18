@@ -21,27 +21,27 @@ class App extends React.Component {
 
   handleClick(e) {}
 
-  checkHorizontalWin(player, row, board) {
+  checkHorizontalWin(player, position, board) {
     let run = 0;
+    let row = position[0];
     for (const col of board[row]) {
-      if (run === 4) {
-        return true;
-      } else if (board[row][col] === player) {
+      if (col === player) {
         run++;
+        if (run === 4) return true;
       } else {
         run = 0;
       }
     }
-    return run => 4;
+    return run >= 4;
   }
 
-  checkVerticalWin(player, col, board) {
+  checkVerticalWin(player, position, board) {
     let run = 0;
+    let col = position[1];
     for (let i = 0; i < board.length; i++) {
-      if (run === 4) {
-        return true;
-      } else if (board[i][col] === player) {
+      if (board[i][col] === player) {
         run++;
+        if (run === 4) return true;
       } else {
         run = 0;
       }
@@ -49,11 +49,63 @@ class App extends React.Component {
     return false;
   }
 
-  checkDiagLWin(player, position, board) {}
+  checkDiagLWin(player, position, board) {
+    let startPosition;
+    if (position[0] > position[1]) {
+      startPosition = [position[0] - position[1], 0];
+    } else {
+      startPosition = [0, position[1] - position[0]];
+    }
 
-  checkDiagRWin(player, position, board) {}
+    let run = 0;
+    let row = startPosition[0];
+    let col = startPosition[1];
+    for (row, col; row < board.length && col < board[0].length; row++, col++) {
+      if (board[row][col] === player) {
+        run++;
+        if (run === 4) return true;
+      } else {
+        run = 0;
+      }
+    }
 
-  checkWin(player, position, board) {}
+    return false;
+  }
+
+  checkDiagRWin(player, position, board) {
+    let startPosition;
+
+    // Check if x is closer to 0, or y is closer to largest y of board
+    if(position[0] < (6 - position[1])) {
+      startPosition = [0, position[0] + position[1]];
+    } else {
+      startPosition = [position[1] - (6 - position[0]), 6];
+    }
+
+    let run = 0;
+    let row = startPosition[0];
+    let col = startPosition[1];
+    for (row, col; row < board.length && col < board[0].length; row++, col--) {
+      if (board[row][col] === player) {
+        run++;
+        if (run === 4) return true;
+      } else {
+        run = 0;
+      }
+    }
+    return false;
+
+  }
+
+  checkWin(player, position, board) {
+    let horizontal = checkHorizontalWin(player, position, board);
+    let vertical = checkVerticalWin(player, position, board);
+    let diagonalL = checkDiagLWin(player, position, board);
+    let diagonalR = checkDiagRWin(player, position, board);
+    return (
+      horizontal || vertical || diagonalL || diagonalR
+    );
+  }
 
   resetGame() {}
 
