@@ -190,7 +190,7 @@ class App extends React.Component {
       <div>
         <h1>Let's Play Connect Four</h1>
         <Score score={this.state.score} players={this.state.players}/>
-        <Board board={this.state.board} handleClick={this.handleClick} resetGame={this.resetGame} />
+        <Board board={this.state.board} players={this.state.players} handleClick={this.handleClick} resetGame={this.resetGame} />
       </div>
     );
   };

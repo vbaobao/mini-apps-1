@@ -7,7 +7,10 @@ function Board(props) {
       <tr key={i} row={i}>
         {row.map((col, j) =>
           <td key={[i, j]} row={i} col={j} onClick={props.handleClick}>
-            {col}
+            {col === 0
+              ? ''
+              : <img src={props.players[col].image} />
+            }
           </td>)}
       </tr>
     );
