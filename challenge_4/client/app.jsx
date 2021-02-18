@@ -42,10 +42,12 @@ class App extends React.Component {
   }
 
   setWinner(player) {
-    let currentScore = this.state.score[player];
+    let newScore = {...this.state.score};
+    newScore[player] = this.state.score[player] + 1;
+
     this.setState({
       winner: player,
-      score: {player: currentScore++},
+      score: newScore,
       turn: player
     });
   }
