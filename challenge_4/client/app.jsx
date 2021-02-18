@@ -58,11 +58,20 @@ class App extends React.Component {
 
   handleClick(e) {
     //When clicked grab column
-    let row = e.target.attributes.row.value;
-    let col = e.target.attributes.col.value;
-    console.log(`Position: ${row}, ${col}`);
+    let selRow = e.target.attributes.row.value;
+    let selCol = e.target.attributes.col.value;
+
     //In column, check for zeros from bottom up
-    //Update board to have player value
+    for (let row = this.state.board.length - 1; row >= 0; row--) {
+      let checkCol = this.state.board[row][selCol];
+      if (checkCol === 0) {
+        //Update board to have player value
+        let newBoard = [...this.state.board];
+        newBoard[row][selCol] = this.state.turn;
+        this.setState({board: newBoard});
+        return;
+      }
+    }
     //checkWin condition
     //if win, setWinner and setNextPlayer to winner
     //if not win, setNextPlayer
