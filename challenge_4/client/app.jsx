@@ -60,21 +60,26 @@ class App extends React.Component {
     //When clicked grab column
     let selRow = e.target.attributes.row.value;
     let selCol = e.target.attributes.col.value;
+    let currBoard = this.state.board;
+    let player = this.state.turn;
 
     //In column, check for zeros from bottom up
-    for (let row = this.state.board.length - 1; row >= 0; row--) {
-      let checkCol = this.state.board[row][selCol];
+    for (let row = currBoard.length - 1; row >= 0; row--) {
+      let checkCol = currBoard[row][selCol];
       if (checkCol === 0) {
         //Update board to have player value
-        let newBoard = [...this.state.board];
-        newBoard[row][selCol] = this.state.turn;
+        let newBoard = [...currBoard];
+        newBoard[row][selCol] = player;
         this.setState({board: newBoard});
+
+        //checkWin condition
+        console.log(this.checkWin(player, [selRow, selCol], newBoard));
+        //if win, setWinner and setNextPlayer to winner
+        //if not win, setNextPlayer
+
         return;
       }
     }
-    //checkWin condition
-    //if win, setWinner and setNextPlayer to winner
-    //if not win, setNextPlayer
   }
 
   checkHorizontalWin(player, position, board) {
@@ -154,10 +159,10 @@ class App extends React.Component {
   }
 
   checkWin(player, position, board) {
-    let horizontal = checkHorizontalWin(player, position, board);
-    let vertical = checkVerticalWin(player, position, board);
-    let diagonalL = checkDiagLWin(player, position, board);
-    let diagonalR = checkDiagRWin(player, position, board);
+    let horizontal = this.checkHorizontalWin(player, position, board);
+    let vertical = this.checkVerticalWin(player, position, board);
+    let diagonalL = this.checkDiagLWin(player, position, board);
+    let diagonalR = this.checkDiagRWin(player, position, board);
     return (
       horizontal || vertical || diagonalL || diagonalR
     );
@@ -167,7 +172,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Let's Play Connect Four</h1>
-        <Board board={this.state.board} handleClick={this.handleClick} resetGame={this.resetGame} score={this.state.score}/>
+        <Board board={this.state.board} handleClick={this.handleClick} resetGame={this.resetGame} score={this.state.score} />
       </div>
     );
   };
