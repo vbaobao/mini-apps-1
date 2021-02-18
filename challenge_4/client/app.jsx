@@ -19,6 +19,14 @@ class App extends React.Component {
     };
   }
 
+  setNextPlayer(player) {
+    player === 1 ? this.setState({turn: 2}) : this.setState({turn: 1});
+  }
+
+  setWinner(player) {
+    this.setState({winner: player});
+  }
+
   handleClick(e) {
     //When clicked grab column
     //In column, check for zeros from bottom up
@@ -112,7 +120,22 @@ class App extends React.Component {
     );
   }
 
-  resetGame() {}
+  resetGame() {
+    this.setState(
+      board: [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0]
+      ]
+    );
+  }
+
+  saveGame() {
+    //This will send a POST request to save game results
+  }
 
   render() {
     return (
