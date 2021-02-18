@@ -22,6 +22,7 @@ class App extends React.Component {
         [0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0]
       ],
+      game: true,
       turn: 1,
       winner: null,
       score: { 1: 0, 2: 0 },
@@ -46,6 +47,7 @@ class App extends React.Component {
     newScore[player] = this.state.score[player] + 1;
 
     this.setState({
+      game: false,
       winner: player,
       score: newScore,
       turn: player
@@ -61,7 +63,8 @@ class App extends React.Component {
         [0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0]
-      ]
+      ],
+      game: true
     });
   }
 
@@ -77,26 +80,26 @@ class App extends React.Component {
     let player = this.state.turn;
 
     //In column, check for zeros from bottom up
-    for (let row = currBoard.length - 1; row >= 0; row--) {
-      let checkCol = currBoard[row][selCol];
-      if (checkCol === 0) {
-        //Update board to have player value
-        let newBoard = [...currBoard];
-        newBoard[row][selCol] = player;
-        this.setState({board: newBoard});
+    if (this.state.game) {
+      for (let row = currBoard.length - 1; row >= 0; row--) {
+        let checkCol = currBoard[row][selCol];
+        if (checkCol === 0) {
+          //Update board to have player value
+          let newBoard = [...currBoard];
+          newBoard[row][selCol] = player;
+          this.setState({board: newBoard});
 
-        //checkWin condition
-        if (this.checkWin(player, [row, selCol], newBoard)) {
-          //if win, setWinner and setNextPlayer to winner
-          alert(`${this.state.players[player].name} wins!`);
-          this.setWinner(player);
-          this.resetGame();
-        } else {
-          //if not win, setNextPlayer
-          this.setNextPlayer(player);
-        };
+          //checkWin condition
+          if (this.checkWin(player, [row, selCol], newBoard)) {
+            //if win, setWinner and setNextPlayer to winner
+            this.setWinner(player);
+          } else {
+            //if not win, setNextPlayer
+            this.setNextPlayer(player);
+          };
 
-        return;
+          return;
+        }
       }
     }
   }
@@ -192,7 +195,10 @@ class App extends React.Component {
       <div>
         <h1>Let's Play Connect Four</h1>
         <Score score={this.state.score} players={this.state.players}/>
-        <Board board={this.state.board} players={this.state.players} handleClick={this.handleClick} resetGame={this.resetGame} />
+        <Board board={this.state.board} players={this.state.players} handleClick={this.handleClick} />
+        <div className='reset'>
+          <button onClick={this.resetGame}>Reset Game</button>
+        </div>
       </div>
     );
   };

@@ -8,6 +8,12 @@ body {
   width: 100%;
 }
 
+h1 {
+  text-align: center;
+  margin: auto;
+  padding: 25px;
+}
+
 #score {
   display: flex;
   justify-content: space-evenly;
@@ -39,4 +45,15 @@ td img {
 
 p {
   text-align: center;
+}
+
+.reset {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.reset button {
+  border: none;
+  padding: 5px 25px;
 }
