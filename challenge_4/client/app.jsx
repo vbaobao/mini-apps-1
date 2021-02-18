@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Board from './board.jsx';
+import Board from './Board.jsx';
+import Score from './Score.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -23,7 +24,16 @@ class App extends React.Component {
       ],
       turn: 1,
       winner: null,
-      score: { 1: 0, 2: 0 }
+      score: { 1: 0, 2: 0 },
+      players: {
+        1: {
+        image: './img/green.png',
+        name: 'Green'
+        },
+        2: {
+          image: './img/purple.png',
+          name: 'Purple'
+        }}
     };
   }
 
@@ -76,7 +86,7 @@ class App extends React.Component {
         //checkWin condition
         if (this.checkWin(player, [row, selCol], newBoard)) {
           //if win, setWinner and setNextPlayer to winner
-          alert(`Player ${player} wins!`);
+          alert(`${this.state.players[player].name} wins!`);
           this.setWinner(player);
           this.resetGame();
         } else {
@@ -179,7 +189,8 @@ class App extends React.Component {
     return (
       <div>
         <h1>Let's Play Connect Four</h1>
-        <Board board={this.state.board} handleClick={this.handleClick} resetGame={this.resetGame} score={this.state.score} />
+        <Score score={this.state.score} players={this.state.players}/>
+        <Board board={this.state.board} handleClick={this.handleClick} resetGame={this.resetGame} />
       </div>
     );
   };
