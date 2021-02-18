@@ -2,7 +2,7 @@ import React from 'react';
 
 function Score(props) {
   return(
-    <div>
+    <div id="score">
       <div>
         <img src={props.players['1'].image} />
         <p>

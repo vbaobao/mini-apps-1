@@ -8,13 +8,22 @@ body {
   width: 100%;
 }
 
+#score {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 img {
-  height: 10%;
-  width: 10%;
+  height: 100px;
+  width: 100px;
 }
 
 span {
   font-weight: bold;
+}
+
+table {
+  margin: auto;
 }
 
 tr, td {
@@ -26,4 +35,8 @@ tr, td {
 td img {
   height: 90%;
   width: 90%;
+}
+
+p {
+  text-align: center;
 }
