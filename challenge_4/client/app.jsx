@@ -35,7 +35,8 @@ class App extends React.Component {
     let currentScore = this.state.score[player];
     this.setState({
       winner: player,
-      score: {player: currentScore++}
+      score: {player: currentScore++},
+      turn: player
     });
   }
 
@@ -73,9 +74,15 @@ class App extends React.Component {
         this.setState({board: newBoard});
 
         //checkWin condition
-        console.log(this.checkWin(player, [row, selCol], newBoard));
-        //if win, setWinner and setNextPlayer to winner
-        //if not win, setNextPlayer
+        if (this.checkWin(player, [row, selCol], newBoard)) {
+          //if win, setWinner and setNextPlayer to winner
+          alert(`Player ${player} wins!`);
+          this.setWinner(player);
+          this.resetGame();
+        } else {
+          //if not win, setNextPlayer
+          this.setNextPlayer(player);
+        };
 
         return;
       }
