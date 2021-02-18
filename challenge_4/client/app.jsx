@@ -19,7 +19,12 @@ class App extends React.Component {
     };
   }
 
-  handleClick(e) {}
+  handleClick(e) {
+    //When clicked grab column
+    //In column, check for zeros from bottom up
+    //Update board to have player value
+    //checkWin condition
+  }
 
   checkHorizontalWin(player, position, board) {
     let run = 0;
