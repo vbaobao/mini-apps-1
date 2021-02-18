@@ -87,7 +87,7 @@ function checkWin(player, position, board) {
 
 describe('Check Win Conditions', () => {
 
-  it('should be able to detect a horizontal win', () => {
+  it('should be able to detect a mid horizontal win', () => {
     let board = [
       [0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0],
@@ -98,6 +98,32 @@ describe('Check Win Conditions', () => {
     ];
 
     assert.equal(checkHorizontalWin(1, [2, 1], board), true);
+  });
+
+  it('should be able to detect a bottom horizontal win', () => {
+    let board = [
+      [0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0],
+      [1,1,1,1,0,0,0]
+    ];
+
+    assert.equal(checkHorizontalWin(1, [5, 0], board), true);
+  });
+
+  it('should be able to detect a top horizontal win', () => {
+    let board = [
+      [1,1,1,1,0,0,0],
+      [0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0]
+    ];
+
+    assert.equal(checkHorizontalWin(1, [0,0], board), true);
   });
 
   it('should be able to detect a vertical win', () => {
