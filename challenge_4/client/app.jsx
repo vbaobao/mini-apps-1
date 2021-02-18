@@ -5,6 +5,13 @@ import Board from './board.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.setNextPlayer = this.setNextPlayer.bind(this);
+    this.setWinner = this.setWinner.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.resetGame = this.resetGame.bind(this);
+    this.saveGame = this.saveGame.bind(this);
+
     this.state = {
       board: [
         [0, 0, 0, 0, 0, 0, 0],
@@ -15,7 +22,8 @@ class App extends React.Component {
         [0, 0, 0, 0, 0, 0, 0]
       ],
       turn: 1,
-      winner: null
+      winner: null,
+      score: { 1: 0, 2: 0 }
     };
   }
 
@@ -24,14 +32,38 @@ class App extends React.Component {
   }
 
   setWinner(player) {
-    this.setState({winner: player});
+    let currentScore = this.state.score[player];
+    this.setState({
+      winner: player,
+      score: {player: currentScore++}
+    });
+  }
+
+  resetGame() {
+    this.setState({
+      board: [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0]
+      ]
+    });
+  }
+
+  saveGame() {
+    //This will send a POST request to save game results
   }
 
   handleClick(e) {
     //When clicked grab column
+    console.log(e.target.attributes.position.value);
     //In column, check for zeros from bottom up
     //Update board to have player value
     //checkWin condition
+    //if win, setWinner and setNextPlayer to winner
+    //if not win, setNextPlayer
   }
 
   checkHorizontalWin(player, position, board) {
@@ -120,28 +152,11 @@ class App extends React.Component {
     );
   }
 
-  resetGame() {
-    this.setState(
-      board: [
-        [0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0]
-      ]
-    );
-  }
-
-  saveGame() {
-    //This will send a POST request to save game results
-  }
-
   render() {
     return (
       <div>
         <h1>Let's Play Connect Four</h1>
-        <Board board={this.state.board} />
+        <Board board={this.state.board} handleClick={this.handleClick} resetGame={this.resetGame} score={this.state.score}/>
       </div>
     );
   };
