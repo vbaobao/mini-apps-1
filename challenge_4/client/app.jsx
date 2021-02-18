@@ -58,7 +58,9 @@ class App extends React.Component {
 
   handleClick(e) {
     //When clicked grab column
-    console.log(e.target.attributes.position.value);
+    let row = e.target.attributes.row.value;
+    let col = e.target.attributes.col.value;
+    console.log(`Position: ${row}, ${col}`);
     //In column, check for zeros from bottom up
     //Update board to have player value
     //checkWin condition

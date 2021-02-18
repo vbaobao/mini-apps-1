@@ -6,7 +6,7 @@ function Board(props) {
     return (
       <tr key={i} row={i}>
         {row.map((col, j) =>
-          <td key={[i, j]} position={[i, j]} onClick={props.handleClick}>
+          <td key={[i, j]} row={i} col={j} onClick={props.handleClick}>
             {col}
           </td>)}
       </tr>
