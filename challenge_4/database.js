@@ -8,4 +8,8 @@ var connection = mysql.createConnection({
 
 module.export = {
 
+  saveGame(data, callback) {}
+
+  loadGame(callback) {}
+
 }
