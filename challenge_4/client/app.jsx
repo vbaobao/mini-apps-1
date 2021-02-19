@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import Board from './Board.jsx';
 import Score from './Score.jsx';
+import History from './History.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -34,8 +36,18 @@ class App extends React.Component {
         2: {
           image: './img/purple.png',
           name: 'Purple'
-        }}
+        }
+      },
+      history: []
     };
+  }
+
+  componentDidMount() {
+    axios.get('/history')
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.error(err));
   }
 
   setNextPlayer(player) {
@@ -69,7 +81,13 @@ class App extends React.Component {
   }
 
   saveGame() {
-    //This will send a POST request to save game results
+    axios.post('/savegame')
+      .then((res) => {})
+      .catch((err) => console.error(err));
+  }
+
+  loadGame() {
+    //Get a saved game, can be resumed!
   }
 
   handleClick(e) {
@@ -194,10 +212,18 @@ class App extends React.Component {
     return (
       <div>
         <h1>Let's Play Connect Four</h1>
-        <Score score={this.state.score} players={this.state.players}/>
-        <Board board={this.state.board} players={this.state.players} handleClick={this.handleClick} />
-        <div className='reset'>
-          <button onClick={this.resetGame}>Reset Game</button>
+        <div class='container'>
+          <div class='history'>
+            <h2>History</h2>
+            <History />
+          </div>
+          <div class='game'>
+            <Score score={this.state.score} players={this.state.players}/>
+            <Board board={this.state.board} players={this.state.players} handleClick={this.handleClick} />
+            <div className='reset'>
+              <button onClick={this.resetGame}>Reset Game</button>
+            </div>
+          </div>
         </div>
       </div>
     );

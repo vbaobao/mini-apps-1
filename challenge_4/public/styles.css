@@ -8,6 +8,11 @@ body {
   width: 100%;
 }
 
+.container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 h1 {
   text-align: center;
   margin: auto;
