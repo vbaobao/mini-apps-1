@@ -13,6 +13,11 @@ body {
   justify-content: space-evenly;
 }
 
+.history div {
+  display: flex;
+  flex-direction: column;
+}
+
 h1 {
   text-align: center;
   margin: auto;
@@ -22,6 +27,12 @@ h1 {
 #score {
   display: flex;
   justify-content: space-evenly;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 img {
@@ -52,13 +63,9 @@ p {
   text-align: center;
 }
 
-.reset {
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-}
-
-.reset button {
-  border: none;
+button {
   padding: 5px 25px;
+  margin: 2px;
+  border: none;
+  border-radius: 5px;
 }

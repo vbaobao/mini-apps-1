@@ -89,7 +89,7 @@ class App extends React.Component {
   saveGame() {
     let options = {...this.state};
     axios.post('/savegame', options)
-      .then((res) => console.log('Game saved!'))
+      .then((res) => alert('Game saved!'))
       .catch((err) => console.error(err));
   }
 
