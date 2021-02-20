@@ -15,6 +15,7 @@ class App extends React.Component {
     this.resetGame = this.resetGame.bind(this);
     this.saveGame = this.saveGame.bind(this);
     this.nameGame = this.nameGame.bind(this);
+    this.loadGame = this.loadGame.bind(this);
 
     this.state = {
       board: [
@@ -88,16 +89,36 @@ class App extends React.Component {
   saveGame() {
     let options = {...this.state};
     axios.post('/savegame', options)
-      .then((res) => {console.log('SAVEGAME RESPONSE: ', res.data)})
+      .then((res) => console.log('Game saved!'))
       .catch((err) => console.error(err));
   }
 
   loadGame(e) {
-    console.log(e);
-    // let options = e.target.data;
-    // axios.post('loadGame', options)
-    //   .then((res) => {})
-    //   .catch((err) => console.error(err));
+    let options = {id: Number(e.target.attributes.gameid.value)};
+    axios.post('/loadgame', options)
+      .then((res) => {
+        let data = res.data[0];
+        let newState = {
+          board: JSON.parse(data.board),
+          name: data.name,
+          game: data.status,
+          turn: data.turn,
+          winner: data.winner,
+          score: { 1: data.p1_score, 2: data.p2_score },
+          players: {
+            1: {
+            image: './img/green.png',
+            name: data.p1_name
+            },
+            2: {
+              image: './img/purple.png',
+              name: data.p2_name
+            }
+          }
+        };
+        this.setState(newState);
+      })
+      .catch((err) => console.error(err));
   }
 
   nameGame(e) {

@@ -15,8 +15,8 @@ app.get('/history', (req, res)=> {
     .catch((err) => err.code);
 });
 
-app.get('/loadgame', (req, res) => {
-  db.loadGameAsync()
+app.post('/loadgame', (req, res) => {
+  db.loadGameAsync(req.body.id)
     .then((results) => res.send(results))
     .catch((err) => err.code);
 })
