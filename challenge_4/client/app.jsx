@@ -45,7 +45,7 @@ class App extends React.Component {
   componentDidMount() {
     axios.get('/history')
       .then((res) => {
-        console.log(res.data);
+        console.log('LOADING HISTORY: ', res.data);
       })
       .catch((err) => console.error(err));
   }

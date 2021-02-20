@@ -6,12 +6,12 @@ var connection = mysql.createConnection({
   database: 'connect4'
 });
 
-module.export = {
+module.exports = {
 
   saveGame: (data, callback) => {
     let sql = 'INSERT INTO games (p1_name, p2_name, p1_score, p2_score, status, turn, winner, board) VALUES (?,?,?,?,?,?,?,?)';
-    let args = [data];
-    connection.query(sql, args, (err, results, fields) => {
+    let inserts = [data.p1_name, data.p2_name, data.p1_score, data.p2_score, data.status, data.turn, data.winner, data.board];
+    connection.query(sql, inserts, (err, results, fields) => {
       if (err) return callback(err);
       callback(null, results);
     });
@@ -19,8 +19,8 @@ module.export = {
 
   loadGame: (gameId, callback) => {
     let sql = 'SELECT * FROM games WHERE id = ?';
-    let args = [gameId];
-    connection.query(sql, args, (err, results, fields) => {
+    let inserts = [gameId];
+    connection.query(sql, inserts, (err, results, fields) => {
       if (err) return callback(err);
       callback(null, results);
     });
@@ -28,8 +28,8 @@ module.export = {
 
   loadHistory: (callback) => {
     let sql = 'SELECT * FROM games';
-    let args = [];
-    connection.query(sql, args, (err, results, fields) => {
+    let inserts = [];
+    connection.query(sql, inserts, (err, results, fields) => {
       if (err) return callback(err);
       callback(null, results);
     });

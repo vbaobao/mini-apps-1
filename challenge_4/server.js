@@ -10,14 +10,15 @@ app.use(bodyparser.json());
 app.use(express.static('./public'));
 
 app.get('/history', (req, res)=> {
-  //Grab from database all games
-  //Get game id, p1 name and score, p2 name and score
-  res.send('GET REQUEST MADE');
+  db.loadHistoryAsync()
+    .then((results) => res.send(results))
+    .catch((err) => err.code);
 });
 
 app.get('/loadgame', (req, res) => {
-  //Load a specific game by game's id
-  res.send('ATTEMPTED TO LOAD GAME');
+  db.loadGameAsync()
+    .then((results) => res.send(results))
+    .catch((err) => err.code);
 })
 
 app.post('/savegame', (req, res) => {
@@ -33,7 +34,7 @@ app.post('/savegame', (req, res) => {
     board: JSON.stringify(body.board)
   }
 
-  db.saveGame(data)
+  db.saveGameAsync(data)
     .then((results) => results)
     .catch((err) => err.code);
 });
