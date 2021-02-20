@@ -14,6 +14,7 @@ class App extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.resetGame = this.resetGame.bind(this);
     this.saveGame = this.saveGame.bind(this);
+    this.nameGame = this.nameGame.bind(this);
 
     this.state = {
       board: [
@@ -24,6 +25,7 @@ class App extends React.Component {
         [0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0]
       ],
+      name: '',
       game: true,
       turn: 1,
       winner: null,
@@ -45,7 +47,10 @@ class App extends React.Component {
   componentDidMount() {
     axios.get('/history')
       .then((res) => {
-        console.log('LOADING HISTORY: ', res.data);
+        let data = [...res.data];
+        this.setState({
+          history: data
+        });
       })
       .catch((err) => console.error(err));
   }
@@ -88,11 +93,15 @@ class App extends React.Component {
   }
 
   loadGame(e) {
-    console.log(e.target);
+    console.log(e);
     // let options = e.target.data;
     // axios.post('loadGame', options)
     //   .then((res) => {})
     //   .catch((err) => console.error(err));
+  }
+
+  nameGame(e) {
+    this.setState({name: e.target.value});
   }
 
   handleClick(e) {
@@ -225,10 +234,11 @@ class App extends React.Component {
           <div className='game'>
             <Score score={this.state.score} players={this.state.players}/>
             <Board board={this.state.board} players={this.state.players} handleClick={this.handleClick} />
-            <div className='reset'>
-              <button onClick={this.resetGame}>Start New Game</button>
-              <button onClick={this.saveGame}>Save Game Session</button>
-            </div>
+            <button onClick={this.resetGame}>Start New Game</button>
+            <form>
+                <input type='text' value={this.state.name} onChange={this.nameGame} />
+                <input type='submit' onClick={this.saveGame} value='Save Game Session' />
+              </form>
           </div>
         </div>
       </div>

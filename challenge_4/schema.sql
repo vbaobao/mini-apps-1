@@ -4,6 +4,7 @@ USE connect4;
 
 CREATE TABLE IF NOT EXISTS games (
   id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(25),
   p1_name VARCHAR(25),
   p2_name VARCHAR(25),
   p1_score INT,

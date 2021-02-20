@@ -24,6 +24,7 @@ app.get('/loadgame', (req, res) => {
 app.post('/savegame', (req, res) => {
   let body = req.body;
   let data = {
+    name: body.name,
     p1_name: body.players['1'].name,
     p1_score:body.score['1'],
     p2_name: body.players['2'].name,

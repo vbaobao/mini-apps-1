@@ -9,8 +9,8 @@ var connection = mysql.createConnection({
 module.exports = {
 
   saveGame: (data, callback) => {
-    let sql = 'INSERT INTO games (p1_name, p2_name, p1_score, p2_score, status, turn, winner, board) VALUES (?,?,?,?,?,?,?,?)';
-    let inserts = [data.p1_name, data.p2_name, data.p1_score, data.p2_score, data.status, data.turn, data.winner, data.board];
+    let sql = 'INSERT INTO games (name, p1_name, p2_name, p1_score, p2_score, status, turn, winner, board) VALUES (?,?,?,?,?,?,?,?,?)';
+    let inserts = [data.name, data.p1_name, data.p2_name, data.p1_score, data.p2_score, data.status, data.turn, data.winner, data.board];
     connection.query(sql, inserts, (err, results, fields) => {
       if (err) return callback(err);
       callback(null, results);
@@ -27,7 +27,7 @@ module.exports = {
   },
 
   loadHistory: (callback) => {
-    let sql = 'SELECT * FROM games';
+    let sql = 'SELECT id, name FROM games';
     let inserts = [];
     connection.query(sql, inserts, (err, results, fields) => {
       if (err) return callback(err);
