@@ -222,7 +222,7 @@ class App extends React.Component {
         <div class='container'>
           <div class='history'>
             <h2>History</h2>
-            <History />
+            <History history={this.state.history} handleClick={this.loadGame} />
           </div>
           <div class='game'>
             <Score score={this.state.score} players={this.state.players}/>
