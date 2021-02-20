@@ -64,6 +64,8 @@ class App extends React.Component {
       score: newScore,
       turn: player
     });
+
+    this.saveGame();
   }
 
   resetGame() {
@@ -81,13 +83,18 @@ class App extends React.Component {
   }
 
   saveGame() {
-    axios.post('/savegame')
-      .then((res) => {})
+    let options = {...this.state};
+    axios.post('/savegame', options)
+      .then((res) => {console.log('SAVEGAME RESPONSE: ', res.data)})
       .catch((err) => console.error(err));
   }
 
-  loadGame() {
-    //Get a saved game, can be resumed!
+  loadGame(e) {
+    console.log(e.target);
+    // let options = e.target.data;
+    // axios.post('loadGame', options)
+    //   .then((res) => {})
+    //   .catch((err) => console.error(err));
   }
 
   handleClick(e) {
