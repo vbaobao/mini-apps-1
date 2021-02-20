@@ -8,10 +8,31 @@ var connection = mysql.createConnection({
 
 module.export = {
 
-  saveGame: (data, callback) => {},
+  saveGame: (data, callback) => {
+    let sql = 'INSERT INTO games (p1_name, p2_name, p1_score, p2_score, status, turn, winner, board) VALUES (?,?,?,?,?,?,?,?)';
+    let args = [data];
+    connection.query(sql, args, (err, results, fields) => {
+      if (err) return callback(err);
+      callback(null, results);
+    });
+  },
 
-  loadGame: (callback) => {},
+  loadGame: (gameId, callback) => {
+    let sql = 'SELECT * FROM games WHERE id = ?';
+    let args = [gameId];
+    connection.query(sql, args, (err, results, fields) => {
+      if (err) return callback(err);
+      callback(null, results);
+    });
+  },
 
-  loadHistory: (callback) => {}
+  loadHistory: (callback) => {
+    let sql = 'SELECT * FROM games';
+    let args = [];
+    connection.query(sql, args, (err, results, fields) => {
+      if (err) return callback(err);
+      callback(null, results);
+    });
+  }
 
 }
