@@ -21,7 +21,6 @@ app.get('/loadgame', (req, res) => {
 })
 
 app.post('/savegame', (req, res) => {
-  //Save a game after a game is won
   let body = req.body;
   let data = {
     p1_name: body.players['1'].name,
@@ -33,10 +32,10 @@ app.post('/savegame', (req, res) => {
     winner: body.winner,
     board: JSON.stringify(body.board)
   }
-  console.log('DATA TO BE SENT TO DB: ', data);
-  // db.saveGame(data)
-  //   .then(() => {})
-  //   .catch();
+
+  db.saveGame(data)
+    .then((results) => results)
+    .catch((err) => err.code);
 });
 
 app.listen(port, console.log(`Listening on http://localhost:${port}`));
