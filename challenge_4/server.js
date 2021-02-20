@@ -22,7 +22,21 @@ app.get('/loadgame', (req, res) => {
 
 app.post('/savegame', (req, res) => {
   //Save a game after a game is won
-  res.send('POST REQUEST MADE');
+  let body = req.body;
+  let data = {
+    p1_name: body.players['1'].name,
+    p1_score:body.score['1'],
+    p2_name: body.players['2'].name,
+    p2_score: body.score['2'],
+    status: body.game,
+    turn: body.turn,
+    winner: body.winner,
+    board: JSON.stringify(body.board)
+  }
+  console.log('DATA TO BE SENT TO DB: ', data);
+  // db.saveGame(data)
+  //   .then(() => {})
+  //   .catch();
 });
 
 app.listen(port, console.log(`Listening on http://localhost:${port}`));

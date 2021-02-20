@@ -64,8 +64,6 @@ class App extends React.Component {
       score: newScore,
       turn: player
     });
-
-    this.saveGame();
   }
 
   resetGame() {
@@ -219,16 +217,17 @@ class App extends React.Component {
     return (
       <div>
         <h1>Let's Play Connect Four</h1>
-        <div class='container'>
-          <div class='history'>
+        <div className='container'>
+          <div className='history'>
             <h2>History</h2>
             <History history={this.state.history} handleClick={this.loadGame} />
           </div>
-          <div class='game'>
+          <div className='game'>
             <Score score={this.state.score} players={this.state.players}/>
             <Board board={this.state.board} players={this.state.players} handleClick={this.handleClick} />
             <div className='reset'>
-              <button onClick={this.resetGame}>Reset Game</button>
+              <button onClick={this.resetGame}>Start New Game</button>
+              <button onClick={this.saveGame}>Save Game</button>
             </div>
           </div>
         </div>
