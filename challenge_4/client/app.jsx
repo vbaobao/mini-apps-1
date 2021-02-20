@@ -227,7 +227,7 @@ class App extends React.Component {
             <Board board={this.state.board} players={this.state.players} handleClick={this.handleClick} />
             <div className='reset'>
               <button onClick={this.resetGame}>Start New Game</button>
-              <button onClick={this.saveGame}>Save Game</button>
+              <button onClick={this.saveGame}>Save Game Session</button>
             </div>
           </div>
         </div>
