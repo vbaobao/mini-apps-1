@@ -100,7 +100,7 @@ class App extends React.Component {
         let data = res.data[0];
         let newState = {
           board: JSON.parse(data.board),
-          name: data.name,
+          name: data.name || 'Unnamed Game',
           game: data.status,
           turn: data.turn,
           winner: data.winner,
